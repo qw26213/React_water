@@ -1,5 +1,8 @@
 import React from 'react'
 export default React.createClass({
+    componentDidMount() {
+        document.title = "表号缴费";document.getElementById('pageTit').innerText = "表号缴费";
+    },
   render() {
     return (
         <div>

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Router,router, Route, browserHistory, IndexRoute } from 'react-router'
+import { Router,router, Route, browserHistory } from 'react-router'
 import $ from 'jquery' 
 export default React.createClass({
   getInitialState: function() {
@@ -10,16 +10,20 @@ export default React.createClass({
     };
   },
   componentDidMount() {
+    document.title = "政策法规";document.getElementById('pageTit').innerText = "政策法规";
     var dataObj={waterCorpId:1}
     var that = this;
-    $.post('http://123.57.47.236:8091/watercorpserver/nt/policy.json',{"requestPara": JSON.stringify(dataObj)},function(value){
+    $.post(ip_url+'/watercorpserver/nt/policy.json',{"requestPara": JSON.stringify(dataObj)},function(value){
          that.setState({loading: false, data: value});
     })
   },
   contextTypes: {
     router: React.PropTypes.object
   },
-  handleClick: function() {
+  handleClick: function(res) {
+          localStorage.LawTitle = res.biaoti;
+          localStorage.LawTime = res.time;
+          localStorage.LawContent = res.neirong;
           this.context.router.push('/LawContent')
   },
   render: function() {
@@ -32,7 +36,7 @@ export default React.createClass({
       var self = this;
       var repoList = repo.map(function (repo,index) {
         return (
-          <div className="h60 ub-ac mt10 plr15 bgb btbc" key={index} onClick={self.handleClick}>
+          <div className="h60 ub-ac mt05 plr15 bgb btbc" key={index} onClick={self.handleClick.bind(null,repo)}>
                 <div className="ub-f1">
                     <h3 className="mt05 ulev1">{repo.biaoti}</h3>
                     <p className="bc mt10 ulev0">{repo.time}</p>
