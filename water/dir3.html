@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="maximum-scale=1,initial-scale=1.0, user-scalable=no, width=device-width">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="x5-orientation" content="portrait">
+    <title>行业热线</title>
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/index.css">
+    <script src="js/jquery.min.js"></script>
+    <script src="js/common.js"></script>
+</head>
+<body>
+<div class="header urel">
+	<div class="headL uabs" onclick="back()"><span class="icon_back ub-img"></span></div>
+	<div class="tx-c w100 pageTit">行业热线</div>
+</div>
+<div class="mt05"><img src="images/rexian.png" alt="" class="w100"></div>
+<div class="bgb plr15 mt10 btbc" onclick="dial(this)">
+    <div class="h40 ub-ac bbc">
+        <span class="rewh re01 ub-img7 mr10"></span>
+        <div class="ub-f1 bc ulev0">24小时热线电话</div>
+        <div class=" sc1 ulev0">0701-6221221</div><span class="arrow-right ub-img7 ml10"></span>
+    </div>
+    <div class="h40 ub-ac bbc" onclick="dial(this)">
+        <span class="rewh re02 ub-img7 mr10"></span>
+        <div class="ub-f1 bc ulev0">举报电话</div>
+        <div class=" sc1 ulev0">0701-6216296</div><span class="arrow-right ub-img7 ml10"></span>
+    </div>
+    <div class="h40 ub-ac bbc" onclick="dial(this)">
+        <span class="rewh re03 ub-img7 mr10"></span>
+        <div class="ub-f1 bc ulev0">水质监督</div>
+        <div class=" sc1 ulev0">0701-6218536</div><span class="arrow-right ub-img7 ml10"></span>
+    </div>
+    <div class="h40 ub-ac" onclick="dial(this)">
+        <span class="rewh re04 ub-img7 mr10"></span>
+        <div class="ub-f1 bc ulev0">工程公司</div>
+        <div class=" sc1 ulev0">0701-6221236</div><span class="arrow-right ub-img7 ml10"></span>
+    </div>
+</div>
+<div class="textTips uhide"><span></span></div>
+</body>
+
+</html>
+<script>
+function dial(obj){
+    var telnum = $(obj).find('.sc1').html();
+    window.location.href = "tel:" + telnum;
+} 
+</script>

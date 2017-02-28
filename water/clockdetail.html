@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="maximum-scale=1,initial-scale=1.0, user-scalable=no, width=device-width">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="x5-orientation" content="portrait">
+    <title>水表信息</title>
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/index.css">
+    <script src="js/jquery.min.js"></script>
+    <script src="js/common.js"></script>
+</head>
+<body>
+<div class="header urel">
+	<div class="headL uabs" onclick="back()"><span class="icon_back ub-img"></span></div>
+	<div class="tx-c w100 pageTit">水表信息</div>
+	<div class="headR uabs" ></div>
+</div>
+<div class="payInput plr15 bgwhite mt10">
+	<div class="h40 ub bbc ub-ac" onclick="openHref('select.html')">
+		<label>水&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;司</label><div class="h30 lh30 ulev0 ub-f1 tx-r">江西鹰潭水司</div><div class="arrow-right ub-img1"></div>
+	</div>
+	<div class="h50 ub bbc ub-ac">
+		<label>手 机 号</label><div class="lh30 ulev0 ub-f1 tx-r"  id="mobile"></div>
+	</div>
+	<div class="h50 ub bbc ub-ac">
+		<label>户 主 名</label><div class="lh30 ulev0 ub-f1 tx-r" id="userName"></div>
+	</div>
+	<div class="h50 ub bbc ub-ac">
+		<label>水 表 号</label><div class="lh30 ulev0 ub-f1 tx-r" id="meterNum" ></div>
+	</div>
+	<div class="h50 ub bbc ub-ac">
+		<label>地&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;址</label><div  id="meteraddr" class="h30 lh30 ulev0 ub-f1 tx-r" ></div>
+	</div>
+	<div class="h40 ub bbc ub-ac">
+		<label>水表昵称</label><input type="text" class="h30 lh30 ulev0 ub-f1 tx-r" placeholder="请输入水表昵称" id="meterName" />
+	</div>
+</div>
+<div class="nextFoot tx-c plr15">
+	<div class="w100 h36" onclick="addmeter()">确认添加</div>
+</div>
+<div class="textTips uhide"><span></span></div>
+</body>
+</html>
+<script>
+clockInit();
+function clockInit(){
+         var clockInfo=   JSON.parse(localStorage.clockInfo);
+         $('#mobile').html(clockInfo[0].mobile);
+         $('#userName').html(clockInfo[0].name);
+         $('#meterNum').html(clockInfo[0].userID);
+         $('#mobile').html(clockInfo[0].mobile);
+         $('#meteraddr').html(clockInfo[0].address);
+         // $('#meterName').html(clockInfo[0].address);
+}
+function addmeter(){
+	if($('#meterName').val().trim()==""){
+		textTip('请输入水表昵称！')
+	}else{
+	        var paraArray = {
+	            waterCorpId:localStorage.waterCorpId,//水司id
+	            token:localStorage.token,//用户爱水平台标识
+	            meterName:"",//水表用户昵称
+	            meterNumber:$('#meterNum').html(),//水表号
+	            areaID:3306,//城市id
+	            meterAlert:0,//是否开启用户缴费提醒
+	            mobile:$('#mobile').html(),
+	            meterNick:$('#meterName').val(),//水表别名
+	            meterAddress:$('#meteraddr').html()//详细地址
+	        };
+	        $.ajax({
+	            url:ip_url+'/memeterinfo/addMeter.json',
+	            type:'POST',
+	            data:{"requestPara":JSON.stringify(paraArray)},
+	            dataType:"json",
+	            success:function(data){
+	                if(data.status==0){
+	                    textTip('水表添加成功');
+	                    setTimeout("location.replace('myclock.html')",1800);
+	                }else{
+	                    textTip(data.message);
+	                }
+	            },
+	            error: function(data){
+	                    textTip("网络太不给力了！");
+	            }
+	        });
+	}
+}
+
+</script>

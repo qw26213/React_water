@@ -1,24 +1,25 @@
 import React from 'react'
-import { Router,router, Route, browserHistory } from 'react-router'
+import { Router, Route, browserHistory,hashHistory } from 'react-router'
 import $ from 'jquery'
 export default React.createClass({
     getInitialState() {
         return {
-            meterNumber:getQueryString('number'),
+            meterNumber:localStorage.curMeternumber,
             btnTxt:"下一步"
         };
     },
     componentDidMount() {
-        document.title = "缴费";document.getElementById('pageTit').innerText = "缴费";
+        document.title = "缴费";$$('pageTit').innerText = "缴费";
+        sessionStorage.removeItem('PayInfo');console.log("清除缴费详情页的数据")
     },
-      contextTypes: {
+   contextTypes: {
         router: React.PropTypes.object
-      },
+   },
     nextFoot:function(){
             var dataObj = {
-                    waterCorpId: localStorage.waterCorpId,//水司id
-                    token: localStorage.token,//用户标识
-                    userID: getQueryString('number')//水表号
+                    waterCorpId: waterCorpId,//水司id
+                    token: token,//用户标识
+                    userID: this.state.meterNumber//水表号
               }
             var self = this;
             $.post(ip_url+'/memeterinfo/queryMeter.json',{"requestPara": JSON.stringify(dataObj)},function(data){
@@ -27,7 +28,7 @@ export default React.createClass({
                                     self.setState({btnTxt:"暂未欠费"});
                            }else{
                                     localStorage.meterNum = data.data[0].userID
-                                    self.context.router.push('/PayInfo')
+                                    self.context.router.push('/PayInfo?number='+self.state.meterNumber)
                           }
                     }else{
                         self.setState({btnTxt:data.message});

@@ -1,6 +1,6 @@
 import React from 'react'
 import { render } from 'react-dom'
-import { Router, Route, browserHistory, IndexRoute } from 'react-router'
+import { Router, Route, browserHistory, IndexRoute,hashHistory } from 'react-router'
 import App from './modules/App'
 import Myapp from './modules/Myapp'
 import Anno from './modules/Home/Anno'
@@ -25,9 +25,24 @@ import AllFunction from './modules/Home/AllFunction'
 import PayWays from './modules/Home/PayWays'
 import Coupon from './modules/Home/Coupon'
 import PayFee from './modules/Home/PayFee'
+import Chart from './modules/Home/Chart'
+import Select from './modules/Home/Select'
+
+import About from './modules/About'
+import Repos from './modules/Repos'
+import PtrDemo from './modules/PtrDemo'
+
+var orignalSetItem = localStorage.setItem;
+localStorage.setItem = function(action,params){
+  var setItemEvent = new Event(action);
+  setItemEvent.params = params;
+  window.dispatchEvent(setItemEvent);
+  orignalSetItem.apply(this,arguments);
+}
+
 
 render((
-      <Router history={browserHistory}>
+      <Router history={hashHistory}>
         <Route path="/" component={App}/>
         <Route path="/Myapp" component={Myapp}/>
         <Route path="/Anno" component={Anno}/>
@@ -52,5 +67,14 @@ render((
         <Route path="/PayWays" component={PayWays}/>
         <Route path="/Coupon" component={Coupon}/>
         <Route path="/PayFee" component={PayFee}/>
+        <Route path="/Chart" component={Chart}/>
+        <Route path="/Select" component={Select}/>
+
+        <Route path="/About" component={About}/>
+        <Route path="/Repos" component={Repos}/>
+        <Route path="/PtrDemo" component={PtrDemo}/>
       </Router>
 ), document.getElementById('app'))
+
+
+

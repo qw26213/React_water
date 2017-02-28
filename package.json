@@ -6,13 +6,18 @@
   "scripts": {
     "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
     "start:dev": "webpack-dev-server --inline --content-base public/ --history-api-fallback",
-    "start:prod": "webpack && node server.js"
+    "start:prod": "webpack && node server.js",
+    "build": "NODE_ENV=production webpack",
+    "build:min": "NODE_ENV=production webpack --config webpack.config.min.js",
+    "publishpatch": "sh deploy/publish.sh",
+    "docs": "sh deploy/docs.sh;"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "compression": "^1.6.1",
     "express": "^4.13.4",
+    "g2-mobile": "^2.1.13-beta",
     "if-env": "^1.0.0",
     "jquery": "^3.1.1",
     "react": "^0.14.7",

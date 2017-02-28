@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="maximum-scale=1,initial-scale=1.0, user-scalable=no, width=device-width">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="x5-orientation" content="portrait">
+    <title>缴费历史</title>
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/index.css">
+    <script src="js/jquery.min.js"></script>
+    <script src="js/common.js"></script>
+</head>
+<body style="background-color:#fff">
+<div class="header urel">
+	<div class="headL uabs" onclick="back()"><span class="icon_back ub-img"></span></div>
+	<div class="tx-c w100 pageTit">缴费历史</div>
+</div>
+<div class="payInput plr10 bgwhite">
+	<div class="h40 ub bbc ub-ac plr10 ub-pj">
+		<div>水表号</div>
+		<div class="tx-r ub-f1" id="curNum">151903145</div><div class="arr-down arr-up ub-img1"></div>
+	</div>
+            <div class="fees">
+	</div>
+</div>
+<div class="loadinger uhide"></div>
+<div class="textTips uhide"><span></span></div>
+</body>
+</html>
+<script>
+getFeelist();
+$('#curNum').html(localStorage.meterNum);
+function getFeelist(){
+   Loading();
+   var paraArray = {
+        token: localStorage.token,//水司id
+        type:2,
+        page:1//水司id
+    }
+    var feeHtml = "";
+    $.ajax({
+        url:ip_url+'/v1/usercenter/queryWalletDetails/v1.json',
+        type:'get',
+        data:{"requestPara":JSON.stringify(paraArray)},
+        dataType:"json",
+        success:function(data){
+            closeLoading();
+            if(data.status==0){
+                if(data.data.detailsList!=""){
+                       for(var i = 0;i<data.data.detailsList.length;i++){
+                            feeHtml +='<div class="h40 ub bbc ub-ac plr10 ub-pj">\
+                                                    <div>-'+data.data.detailsList[i].money+'</div>\
+                                                    <div class="tx-r ub-f1">'+formatDate(data.data.detailsList[i].time)+'</div>\
+                                                 </div>';
+                       }
+                   }else{
+                            feeHtml +='<div class="ub-apc h400">缴费历史为空</div>'
+                   }
+               $('.fees').html(feeHtml);
+            }
+        },
+        error: function(err){
+            closeLoading();
+            var nofeeHtml = '<div class="ub-apc h400">网络太不给力了,请返回重试！</div>';
+           $('.fees').html(feeHtml);
+        }
+    })
+
+}
+</script>

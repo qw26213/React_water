@@ -1,6 +1,6 @@
 import React from 'react'
-import { Router,router, Route, browserHistory } from 'react-router'
-import $ from 'jquery' 
+import { Router,router, Route, hashHistory } from 'react-router'
+import $ from 'jquery'
 export default React.createClass({
   getInitialState: function() {
     return {
@@ -10,11 +10,12 @@ export default React.createClass({
     };
   },
   componentDidMount() {
-    document.title = "政策法规";document.getElementById('pageTit').innerText = "政策法规";
-    var dataObj={waterCorpId:1}
+    document.title = "政策法规";$$('pageTit').innerText = "政策法规";
+    var dataObj={waterCorpId:1};
     var that = this;
     $.post(ip_url+'/watercorpserver/nt/policy.json',{"requestPara": JSON.stringify(dataObj)},function(value){
          that.setState({loading: false, data: value});
+         console.log(value);
     })
   },
   contextTypes: {
@@ -30,7 +31,7 @@ export default React.createClass({
     if (this.state.loading) {
       return <div className="h240 ub-apc">Loading<dot>...</dot></div>;
     } else if (this.state.error !== null) {
-      return <div className="textTips uhide"><span>{error.message}</span></div>;
+      return <div className="textTips"><span>{error.message}</span></div>;
     } else {
       var repo = this.state.data.data;
       var self = this;

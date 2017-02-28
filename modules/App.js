@@ -1,5 +1,11 @@
 import React from 'react'
+import { Router, Route, browserHistory, IndexRoute } from 'react-router'
+
 import NavLink from './NavLink'
+import About from './About'
+import Repos from './Repos'
+
+
 import MeterList from './Home/MeterList'
 import Grid from './Home/Grid'
 import Anno from './Home/Anno'
@@ -18,8 +24,8 @@ export default React.createClass({
       //   <h1>React Router Tutorial</h1>
       //   <ul role="nav">
       //     <li><NavLink to="/" onlyActiveOnIndex>Home</NavLink></li>
-      //     <li><NavLink to="/about">About</NavLink></li>
-      //     <li><NavLink to="/repos">Repos</NavLink></li>
+      //     <li><NavLink to="/About">About</NavLink></li>
+      //     <li><NavLink to="/Repos">Repos</NavLink></li>
       //   </ul>
       //   {this.props.children}
       // </div>

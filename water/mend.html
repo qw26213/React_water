@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="maximum-scale=1,initial-scale=1.0, user-scalable=no, width=device-width">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="x5-orientation" content="portrait">
+    <title>在线报修</title>
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/index.css">
+    <script src="js/jquery.min.js"></script>
+    <script src="js/iscroll.js"></script>
+    <script src="js/common.js"></script>
+</head>
+<body>
+<div class="header urel">
+	<div class="headL uabs" onclick="back()"><span class="icon_back ub-img"></span></div>
+	<div class="tx-c w100 pageTit">在线报修</div>
+</div>
+<div class="plr15 mt10 bgb btbc">
+    <div class="ub-ac bbc">
+        <div class="w70">用&nbsp;户&nbsp;名</div>
+        <input  type="text" class="ub-f1 h45 mr15 ulev1 ml05" placeholder="请输入用户名"  id="mend_name" />
+        <div class="red">*</div>
+    </div>
+    <div class="ub-ac">
+        <div class="w70">联系电话</div>
+        <input  type="text" class="ub-f1 h45 mr15 ulev1 ml05" placeholder="请输入电话" id="mend_tel" />
+        <div class="red">*</div>
+    </div>
+</div>
+
+<div class="plr15 mt10 bgb btbc">
+    <div class="ub-ac bbc">
+        <div class="w70">报修地点</div>
+        <input  type="text" class="ub-f1 h45 ulev1 ml05" placeholder="请输入报修地点" id="mend_addre" />
+        <span class="red">*</span>
+    </div>
+    <div class="ub-ac">
+        <div class="w70">报修类型</div>
+        <select  type="text" class="ub-f1 h45 ulev1 ml05" id="mend_type">
+            <option value="">请输入报修类型</option>
+            <option value="1">水质水压</option>
+            <option value="2">管道漏损</option>
+            <option value="3">水表破坏</option>
+        </select>
+    </div>
+</div>
+
+<div class="plr15 mt15">
+    <p class="mendType">报修类型如下：</p>
+    <p class="bc lh36 ulev0">1、水质水压：出水过黄或有浑浊物、出水水流过低或间歇性无水；</p>
+    <p class="bc lh36 ulev0">2、管道漏损：标签主管、道路漏水；</p>
+    <p class="bc lh36 ulev0">3、水表破坏：水表玻璃破裂、水表不转、水表冻坏；</p>
+</div>
+<div class="nextFoot tx-c plr15">
+    <div class="w100 h36" onclick="submit()">提 交</div>
+</div>
+<div class="textTips uhide"><span></span></div>
+</body>
+
+</html>
+<script>
+function submit(){
+    var mend_name = $("#mend_name").val().trim();
+    var mend_tel = $("#mend_tel").val().trim();
+    var mend_addre = $("#mend_addre").val().trim();
+    var mend_type = $("#mend_type").val();
+        if(mend_name==""){
+            textTip('联系人姓名不能为空~');
+        }else if(mend_tel==""){
+            textTip('联系电话不能为空~');
+        }else if(!telCheck(mend_tel)){
+            textTip('联系电话格式不正确~');
+        }else if(mend_addre==""){
+            textTip('报修地点不能为空~');
+        }else if(mend_type==""){
+            textTip('报修类型不能为空~');
+        }else{
+            var paraArray = {
+                meterName:mend_name,
+                mobile:mend_tel,
+                address:mend_addre,
+                repairType:mend_type,
+                token: localStorage.token,//token
+                waterCorpId: localStorage.waterCorpId//水司id
+            }
+            $.ajax({
+                url:ip_url+'/watercorpserver/nt/onlineRepair.json',
+                type:'POST',
+                data:{"requestPara":JSON.stringify(paraArray)},
+                dataType:"json",
+                success:function(data){
+                    if(data.status==0){
+                        textTip('报修提交成功！');
+                        setTimeout("back()",1800);
+                   }
+                },
+                error: function(err){
+                        textTip('网络太不给力了！');
+                }
+            });
+     }
+}
+</script>
+

@@ -1,8 +1,6 @@
-
 //-------判断是否为空
 function isNull(value) {
-	if(value.replace(/(^s*)|(s*$)/g, "").length ==0
-		|| value=="null"){
+	if(value.replace(/(^s*)|(s*$)/g, "") == ""|| value=="null"||value==""||value==undefined||value==null){
 		return true;
 	}else{
 		return false;
@@ -34,7 +32,7 @@ function email_check(r){
     }
 }
 //----------判断邮编---------
-function Zip_code_check(number){
+function postCode_check(number){
     var re=  /^[0-9][0-9]{5}$/;
     if(!re.test(number)){
         return false;
@@ -53,14 +51,6 @@ function back(){
 // ----------去除连接符----------
 function delLinkMark(str){
 	return str.replace(/-/g,""); 
-}
-// ----------格式化日期----------
-function formatDate(num){
-	if(parseInt(num)<10){
-		return "0"+num;
-	}else{
-		return num;
-	}
 }
 //----------调试log--------
 function log(str){
@@ -97,6 +87,14 @@ function isNumber(str){
 	}else{
 	        return false;
 	}
+}
+// -----------是否是中文---------
+function isZh(str){
+    if(/^[\u4e00-\u9fa5]+$/i.test(str)){
+            return true;
+    }else{
+            return false;
+    }
 }
 // 整型、浮点型验证
 function isFloat(oNum){
@@ -205,6 +203,21 @@ function stampify(str){
      return timestamp;
 }
 
+//****获取当前时间返回20151102格式日期
+function getCurDate() {
+    var date = new Date();
+    var month = date.getMonth() + 1;
+    var strDate = date.getDate();
+    if (month >= 1 && month <= 9) {
+        month = "0" + month;
+    }
+    if (strDate >= 0 && strDate <= 9) {
+        strDate = "0" + strDate;
+    }
+    var currentdate = date.getFullYear()+"" + month+""+ strDate;
+    return currentdate;
+}
+
 // 根据时间戳格式化日期
 function add0(m){return m<10?'0'+m:m }
 function formatDate(stortime){
@@ -223,3 +236,5 @@ function formatDate(stortime){
 function RndNum(MaxNum, MinNum) {
     return parseInt((MaxNum - MinNum + 1) * Math.random() + MinNum)
 }
+
+

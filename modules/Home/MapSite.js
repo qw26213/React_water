@@ -3,13 +3,10 @@ import $ from 'jquery'
 
 export default React.createClass({
    getInitialState(){
-    return { }
-  },
+        return { }
+   },
    componentDidMount() {
      document.title = "网点导航";document.getElementById('pageTit').innerText = "网点导航";
-     const script1 = document.createElement("script");
-    script1.src = "http://webapi.amap.com/maps?v=1.3&key=a3c2aabcdb9127f897c157c6e11f5a55";
-    document.head.appendChild(script1);
        var map = new AMap.Map('Mapcontainer', {
             resizeEnable: true,
             center:[28.243662, 117.035544],

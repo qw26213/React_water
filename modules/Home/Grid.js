@@ -1,6 +1,16 @@
 import React from 'react'
+import { Router, Route, hashHistory } from 'react-router'
 import { Link } from 'react-router' 
 export default React.createClass({
+    toPage1(){
+        location.href = '../water/watermoney/index.html';
+    },
+    toPage2(){
+        location.href = '../water/index.html';
+    },
+    toPage3(){
+        location.href = '../water/vote.html';
+    },
   render() {
     return (
     <div className="bgb mt10 btbc">
@@ -107,16 +117,16 @@ export default React.createClass({
                 <h3>支付方式</h3>
             </div>
             </Link>
-            <Link to="/Coupon">
+            <Link to="/PtrDemo">
             <div className="w25 ub-apc pt10 ub-ver">
                 <div className="icon_08 iconwh ub-img7"></div>
-                <h3>优惠劵</h3>
+                <h3>上拉加载</h3>
             </div>
             </Link>
-            <Link to="/PayFee">
+            <Link to="/Chart">
             <div className="w25 ub-apc pt10 ub-ver">
                 <div className="icon_08 iconwh ub-img7"></div>
-                <h3>缴费</h3>
+                <h3>折线图</h3>
             </div>
             </Link>
             <Link to="/PayInfo">
@@ -125,6 +135,18 @@ export default React.createClass({
                 <h3>缴费详情</h3>
             </div>
             </Link>
+            <div className="w25 ub-apc pt10 ub-ver" onClick={this.toPage1}>
+                <div className="icon_08 iconwh ub-img7"></div>
+                <h3>我的水币</h3>
+            </div>
+            <div className="w25 ub-apc pt10 ub-ver" onClick={this.toPage2}>
+                <div className="icon_08 iconwh ub-img7"></div>
+                <h3>用水主页</h3>
+            </div>
+            <div className="w25 ub-apc pt10 ub-ver" onClick={this.toPage3}>
+                <div className="icon_08 iconwh ub-img7"></div>
+                <h3>投票</h3>
+            </div>
         </div>
     </div>
     );

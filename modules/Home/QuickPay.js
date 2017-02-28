@@ -1,7 +1,47 @@
 import React from 'react'
+import { Router, Route,hashHistory } from 'react-router'
+import $ from 'jquery'
 export default React.createClass({
+   getInitialState:function(){
+      return {
+          name:"请选择水司",
+          number:''
+      }
+   },
+  contextTypes: {
+    router: React.PropTypes.object
+  },
     componentDidMount() {
-        document.title = "表号缴费";document.getElementById('pageTit').innerText = "表号缴费";
+        document.title = "表号缴费";$$('pageTit').innerText = "表号缴费";
+        var waterCorpIdIndex = localStorage.waterCorpIdIndex||0;
+        var watercorList = ["江西鹰潭水司","余江水司"];
+        this.setState({name:watercorList[waterCorpIdIndex]});
+    },
+    nextFoot(){
+      if(this.state.name==""){
+        alert("名字不能为空");return;
+      }
+      if(this.state.number==""){
+        alert("水表号不能为空");return;
+      }
+      var dataObj = {
+            waterCorpId:waterCorpId,
+            token:token,
+            meterName:"",
+            userID:this.state.number
+      }
+      var that = this;
+        $.post(ip_url+'/memeterinfo/queryMeter.json',{"requestPara": JSON.stringify(dataObj)},function(data){
+                if(data.status==0){
+                        localStorage.meterData = JSON.stringify(data.data[0]);
+                        that.context.router.push('/PayFee');
+                }else{
+                        alert(data.message);
+                }
+        })
+    },
+    toSelect(){
+         this.context.router.push('/Select');
     },
   render() {
     return (
@@ -9,7 +49,7 @@ export default React.createClass({
             <div className="plr15 bgb btbc mt10">
                 <div className="h45 bbc ub-ac">
                     <div className="w60">水&nbsp;&nbsp;司</div>
-                    <div className="h30 ulev0 ub-f1 lh30 ml10">请选择水司</div>
+                    <div className="h30 ulev0 ub-f1 lh30 ml10" onClick = {this.toSelect}>{this.state.name}</div>
                     <div className="arrow-right ub-img1"></div>
                 </div>
                 <div className="h45 ub-ac">
@@ -18,7 +58,7 @@ export default React.createClass({
                 </div>
             </div>
             <div className="nextFoot tx-c plr15">
-                <button className="w100 h40">下一步</button>
+                <button className="w100 h40" onClick = {this.nextFoot}>下一步</button>
             </div>
         </div>
     );

@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="maximum-scale=1,initial-scale=1.0, user-scalable=no, width=device-width">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="x5-orientation" content="portrait">
+    <title>在线报装</title>
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/index.css">
+    <script src="js/jquery.min.js"></script>
+    <script src="js/common.js"></script>
+</head>
+<style>
+    input[type="file"]{position:absolute; width: 100%; height: 100%; display: block; left: 0;top: 0; opacity: 0;}
+    .link{color:#000;text-decoration: underline}
+</style>
+<body>
+<div class="header urel">
+	<div class="headL uabs" onclick="back()"><span class="icon_back ub-img"></span></div>
+	<div class="tx-c w100 pageTit">在线报装</div>
+</div>
+<div class="plr15 mt10 bgb btbc">
+    <div class="ub-ac bbc h40">
+        <div class="w70">用&nbsp;户&nbsp;名</div>
+        <input  type="text" class="ub-f1 h30 mr15 ulev1 ml05" placeholder="请输入用户名"  id="userName" />
+        <div class="red">*</div>
+    </div>
+    <div class="ub-ac h40">
+        <div class="w70">联系电话</div>
+        <input  type="text" class="ub-f1 h30 mr15 ulev1 ml05" placeholder="请输入电话" id="telNumber" />
+        <div class="red">*</div>
+    </div>
+</div>
+
+<div class="plr15 mt10 bgb btbc">
+    <div class="ub-ac bbc h40">
+        <div class="w70">缴&nbsp;费&nbsp;号</div>
+        <input  type="text" class="ub-f1 h30 ulev1 ml05" placeholder="分户或总表用户需提供原缴费号码" id="feeNumber" />
+        <span class="red">*</span>
+    </div>
+    <div class="ub-ac h40">
+        <div class="w70">报装地点</div>
+        <input  type="text" class="ub-f1 h30 ulev1 ml05" placeholder="请输入报装地点" id="addressNumber" />
+        <span class="red">*</span>
+    </div>
+</div>
+<div class="plr15 mt10 bgb btbc">
+    <div class="w100 ub h120 mt15">
+        <div class="ub-f1 ub-apc ub-ver mr20" style="width:0">
+            <img src="css/img/upload.png" width="66" height="66" id="image01" class="mt10">
+            <div class="tx-c mt15 bc">身份证/户口本</div>
+            <input type="file" accept="image/*" multiple  id="IDImg"  onchange="upImg(this)" />
+        </div>
+        <div class="ub-f1 ub-apc ub-ver" style="width:0">
+            <img src="css/img/upload.png" width="66" height="66" id="image02" class="mt10">
+            <div class="tx-c mt15 bc">房产证</div>
+            <input type="file" accept="image/*" multiple  id="FangImg" onchange="upImg(this)"/>
+        </div>
+    </div>
+</div>
+
+<div class="plr15 mt15">
+    <p class="bc lh24 ulev0">备注：自建房需下载<a class="link" href="http://www.jxytgs.com/fujian/%E4%B8%AA%E4%BA%BA%E6%8A%A5%E5%BB%BA%E5%AE%A1%E6%89%B9%E6%89%8B%E7%BB%AD.doc
+">《个人审批手续》</a>到街道办事处（乡政府）和居委会（村小组）盖公章</p>
+</div>
+<div class="nextFoot tx-c plr15">
+    <div class="w100 h40" onclick="submit()">提 交</div>
+</div>
+<div class="textTips uhide"><span></span></div>
+</body>
+</html>
+<script>
+function submit(){
+    var username = $('#userName').val().trim();
+    var addressnumber = $('#addressNumber').val().trim();
+    var feenumber = $('#feeNumber').val().trim();
+    var telnumber = $('#telNumber').val().trim();
+    var IdCardUrl=$('#image01').attr('src');
+    var houseCardUrl=$('#image02').attr('src');
+
+    if(username==""){
+        textTip('联系人姓名不能为空！')
+    }else if(addressnumber==""){
+        textTip('地址门号不能为空！')
+    }else if(feenumber==""){
+        textTip('缴费号不能为空！')
+    }else if(telnumber==""){
+        textTip('联系方式不能为空！')
+    }else if(IdCardUrl=="css/img/upload.png"){
+        textTip('请上传身份证或户口本！')
+    }else if(houseCardUrl=="css/img/upload.png"){
+        textTip('请上传房产证！')
+    }else if(!telCheck(telnumber)){
+        textTip('联系方式格式不正确！')
+    }else{
+        var paraArray = {
+                meterName: username,
+                mobile:telnumber,
+                address:addressnumber,
+                meternum:feenumber,
+                IdCardUrl:IdCardUrl,
+                houseCardUrl:houseCardUrl,
+                packType:"",
+                token: localStorage.token,//token
+                waterCorpId: localStorage.waterCorpId//水司id
+        };
+        var feeArray=[];
+        $.ajax({
+            url:ip_url+'/watercorpserver/nt/onlinePack.json',
+            type:'POST',
+            data:{"requestPara":JSON.stringify(paraArray)},
+            dataType:"json",
+            success:function(data){
+                if(data.status==0){
+                    textTip("报装提交成功！");
+                    setTimeout('back()',1800);
+                }else{
+                    textTip(data.message);
+                }
+            },
+            error: function(data){
+                    textTip("网络太不给力了");
+            }
+        });
+    }
+}
+// 上传图片
+function upImg(file){
+  if (file.files && file.files[0]) {
+    var B = file.files[0];
+    if (!B || !B.type.match(/image.*/)) { textTip("仅支持图片文件"); return }
+     var reader = new FileReader();
+     reader.onload = function(evt){
+        var fileArr=[];
+        fileArr.push(evt.target.result.split(',')[1]);
+        $.ajax({
+              url:ip_url+"/iwatermgr/shop/uploadBase64.json",
+              type: "post",
+              data: {'base64Code':fileArr},
+              dataType: 'json',
+              traditional: true,
+              success: function(data) {
+                  var data = eval(data);
+                  if (data.status == 0) {
+                     $(file).siblings('img').attr('src',data.data[0]);
+                     console.log(data.data[0])
+                  } else {
+                      textTip(data.message);
+                  }
+              },
+              error: function(err) {
+                      textTip('图片上传失败！');
+              }
+          });
+        }
+        reader.readAsDataURL(file.files[0]);
+    }
+}
+</script>

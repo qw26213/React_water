@@ -1,7 +1,9 @@
 import React from 'react'
 export default React.createClass({
    componentDidMount() {
-      document.title = "用水";document.getElementById('pageTit').innerText = "用水";
+      document.title = "用水";$$('pageTit').innerText = "用水";
+        sessionStorage.removeItem('meterInfo');console.log("清除水表列表页的数据");
+        localStorage.removeItem("waterCorpIdIndex");
   },
   render() {
     return (

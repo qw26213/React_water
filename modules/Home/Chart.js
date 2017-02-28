@@ -1,42 +1,70 @@
 import React from 'react'
-import GM from '../../public/js/G2-mobile-chart';
+import GM from 'g2-mobile';
+import { Router,router, Route, browserHistory } from 'react-router'
+import $ from 'jquery' 
 
 export default React.createClass({
-   componentDidMount() {
+  getInitialState: function() {
+    return {
+      curYear:new Date().getFullYear(),
+      nowYear:getCurDate(),
+      loading: true,
+      error: null,
+      data: null,
+    };
+  },
+  contextTypes: {
+    router: React.PropTypes.object
+  },
+    ToPayFee:function(){
+            this.context.router.push('/PayFee?number='+this.props.number);
+    },
+    getDetailInfo:function(){
+        var dataObj={
+          token:token,
+          meterNumber:localStorage.curMeternumber,
+          accountType:"XJ",
+          startDate:this.state.curYear+"0101",
+          endDate:this.state.nowYear,
+          payStatus:"1",
+          waterCorpId:waterCorpId
+        };
+        var that = this;
+        $.post(ip_url+'/v1/watermeter/queryPayMentInfo/v2.json',{"requestPara": JSON.stringify(dataObj)},function(value){
+             that.setState({loading: false, data: value});
+             var payData=[];
+             for(let i = 0;i<value.data.length;i++){
+                    payData.push({"time":String(add0(i+1)),"value" : parseFloat(value.data[i].paidAmount)});
+             }
+            that.ChartInit(payData);
+        })
+    },
+   componentWillMount:function() {
+          this.getDetailInfo()
+    },
+    prepYear:function(){
+          this.state.curYear--;
+          this.state.nowYear = String(this.state.curYear)+"1231";
+          this.getDetailInfo()
+    },
+   nextYear:function(){
+          if(this.state.curYear>=new Date().getFullYear()){
+              return;
+          }
+          this.state.curYear++;
+          this.state.nowYear= String(this.state.curYear)+"1231";
+          this.getDetailInfo()
+    },
+
+    ChartInit:function(array){
       GM.Global.pixelRatio = 2;
       var Util = GM.Util;
-      var data = [
-        {"time": '1',"tem": 10},
-        {"time": '2',"tem": 20},
-        {"time": '3',"tem": 10},
-        {"time": '4',"tem": 10},
-        {"time": '5',"tem": 10},
-        {"time": '6',"tem": 10},
-        {"time": '7',"tem": 10},
-        {"time": '8',"tem": 5},
-        {"time": '9',"tem": 10},
-        {"time": '10',"tem": 8},
-        {"time": '11',"tem": 9},
-        {"time": '12',"tem": 10}
-      ];
       var chart = new GM.Chart({id: 'myChart'});
       var defs = {
-        time: {
-          type: 'timeCat',
-          mask: '0',
-          tickCount: 2,
-          range:[0,1]
-        },
-        tem: {
-          tickCount: 5,
-          min: 0
-        }
+        time: {type: 'timeCat',mask: 'mm',tickCount: 12,range:[0,1]},
+        value: {tickCount: 5,min: 0}
       };
-      var label = {
-        fill: '#979797',
-        font: '5px san-serif',
-        offset: 6
-      };
+      var label = {fill: '#979797', font: '5px san-serif', offset: 6};
       chart.axis('time', {
         label: function (text, index, total) {
           var cfg = Util.mix({}, label);
@@ -49,20 +77,33 @@ export default React.createClass({
           return cfg;
         }
       });
-      chart.axis('tem', {
+      chart.axis('value', {
         label: {
           fontSize: 5
         }
       });
-      chart.source(data, defs);
-      chart.line().position('time*tem').shape('smooth');
-      chart.point().position('time*tem');
+      chart.source(array, defs);
+      chart.line().position('time*value').shape('smooth');
+      chart.point().position('time*value');
       chart.render();
-  },
+    },
+   componentDidMount:function() {
+    },
   render() {
     return (
-    <div className="ub-apc h240">
-        <canvas id="myChart"></canvas>
+
+    <div>
+        <div className="mt05 bgb ub-ac plr15">
+            <div className="ub-ac h30">{this.state.curYear}年缴费记录</div>
+            <div className="h45 ub-ac ub-pe ub-f1">
+                    <button className="control4  ub-img7" onClick={this.ToPayFee}>缴水费</button>
+                    <button className="control3 ml15 ub-img7" onClick={this.prepYear}>上一年</button>
+                    <button className="control3 ml15 ub-img7" onClick={this.nextYear}>下一年</button>
+            </div>
+        </div>
+        <div className="h240">
+            <canvas id="myChart"></canvas>
+        </div>
     </div>
     );
   }

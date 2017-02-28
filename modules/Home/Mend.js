@@ -1,7 +1,7 @@
 import React from 'react'
 export default React.createClass({
    componentDidMount() {
-      document.title = "在线报修";document.getElementById('pageTit').innerText = "在线报修";
+      document.title = "在线报修";$$('pageTit').innerText = "在线报修";
   },
   render() {
     return (
