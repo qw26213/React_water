@@ -117,7 +117,7 @@ export default React.createClass({
                 <h3>支付方式</h3>
             </div>
             </Link>
-            <Link to="/PtrDemo">
+            <Link to="/PullToRefresh">
             <div className="w25 ub-apc pt10 ub-ver">
                 <div className="icon_08 iconwh ub-img7"></div>
                 <h3>上拉加载</h3>
@@ -133,6 +133,12 @@ export default React.createClass({
             <div className="w25 ub-apc pt10 ub-ver">
                 <div className="icon_08 iconwh ub-img7"></div>
                 <h3>缴费详情</h3>
+            </div>
+            </Link>
+            <Link to="/CityPicker">
+            <div className="w25 ub-apc pt10 ub-ver">
+                <div className="icon_08 iconwh ub-img7"></div>
+                <h3>城市选择</h3>
             </div>
             </Link>
             <div className="w25 ub-apc pt10 ub-ver" onClick={this.toPage1}>

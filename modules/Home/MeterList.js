@@ -1,9 +1,23 @@
 import React from 'react'
+import $ from 'jquery'
 export default React.createClass({
+  getInitialState: function() {
+    return {data: null};
+  },
    componentDidMount() {
       document.title = "用水";$$('pageTit').innerText = "用水";
         sessionStorage.removeItem('meterInfo');console.log("清除水表列表页的数据");
         localStorage.removeItem("waterCorpIdIndex");
+        var dataObj = {moduleId:26,province:"北京",city:"北京",county:"朝阳",token,token};
+        var that = this;
+        console.log(70)
+        $.post(ip_url+'/v1/appFunction/getModuleData.json',{"requestPara": JSON.stringify(dataObj)},function(value){
+                    that.setState({data: value});
+                    console.log(100)
+        });
+  },
+  getPageInit(){
+    console.log(0)
   },
   render() {
     return (

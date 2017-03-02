@@ -46,11 +46,21 @@ function openHref(str){
 }
 // ----------返回上一页----------
 function back(){
-	window.history.go(-1);
+  window.history.go(-1);
+}
+// ----------稍候返回上一页----------
+function wait_back(){
+  setTimeout(function(){
+    window.history.go(-1);
+  },1800)
+}
+// ----------去除空格----------
+function trim(str) {
+  return str.replace(/(^\s+)|(\s+$)/g, "");
 }
 // ----------去除连接符----------
 function delLinkMark(str){
-	return str.replace(/-/g,""); 
+  return str.replace(/-/g,""); 
 }
 //----------调试log--------
 function log(str){
@@ -79,7 +89,7 @@ function isFloat(oNum){
      }
      return true;
 }
-//-----------正整数验证----------
+//-----------数字验证----------
 function isNumber(str){
 	var retel = /^[\d]+$/;
 	if(retel.test(str)){
@@ -96,19 +106,6 @@ function isZh(str){
             return false;
     }
 }
-// 整型、浮点型验证
-function isFloat(oNum){
-     if(!oNum) return false;
-     var strP=/^\d+(\.\d+)?$/;
-     if(!strP.test(oNum)) return false;
-     try{
-      if(parseFloat(oNum)!=oNum) return false;
-     }catch(ex){
-       return false;
-     }
-     return true;
-}
-
 // 去除数组空元素
  function ClearNullArr(arr){
     var len=arr.length;
@@ -238,3 +235,22 @@ function RndNum(MaxNum, MinNum) {
 }
 
 
+// 开启loading页
+function Loading(){
+    var loadingHtml = '<div class="loadingbox"><div class="loading_icon ub-img7"></div><p>加载中...</p></div>';
+    $$('loadinger').style.display = "block";
+    $$('loadinger').innerHTML = loadingHtml;
+}
+// 关闭loading页
+function closeLoading(){
+    $$('loadinger').style.display = "";
+    $$('loadinger').innerHTML = "";
+}
+// -------提示框------
+function textTip(text){
+    $$("textTips").getElementsByTagName('span')[0].innerText = text;
+    $$("textTips").style.display="block";
+    setTimeout(function(){
+        $$("textTips").style.display="none";
+    },1500);
+}

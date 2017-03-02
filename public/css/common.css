@@ -113,7 +113,7 @@ i,em,b{font-style: normal;}
 .h26{height: 26px; line-height: 26px}
 .h30 { height: 30px; }
 .h36 { height: 36px; }
-.h40 { height: 40px; }
+.h40 { height: 40px;line-height: 40px;}
 .h45{ height: 45px; }
 .h50 { height: 50px; }
 .h60 { height: 60px; }
@@ -202,8 +202,8 @@ i,em,b{font-style: normal;}
 .bgs6{background-color: #e5e5e5;}
 .bgs7{background-color: #fff5de; color: #ffc158}
 /*弹出框样式*/
-.textTips { width: 100%; height: 100px; text-align: center; position: fixed; left: 0; top: 50%; margin-top: -50px; z-index: 999; }
-.textTips span { display: inline-block; padding:15px 20px; background: rgba(0, 0, 0, 0.7); color: #fff; font-size: 14px; line-height: 30px; overflow: hidden; border-radius: 3px; max-width: 60%;min-width: 100px}
+#textTips { width: 100%; height: 100px; text-align: center; position: fixed; left: 0; top: 50%; margin-top: -50px; z-index: 999;display: none }
+#textTips span { display: inline-block; padding:15px 20px; background: rgba(0, 0, 0, 0.7); color: #fff; font-size: 14px; line-height: 30px; overflow: hidden; border-radius: 3px; max-width: 60%;min-width: 100px}
 /*头部样式*/
 .header{border-bottom: 1px #C8C8C8 solid; position: fixed; width: 100%;height: 45px;  background-color: #fff; top: 0;left: 0;z-index: 9999;}
 .pageTit{color: #333; line-height: 45px; height: 100%; font-size: 18px;text-align: center;}
@@ -214,7 +214,7 @@ i,em,b{font-style: normal;}
 .headL{width: 80px;top: 0;left: 15px; height: 45px;}
 .headR{width: 80px;top: 0;right: 15px; height: 45px;}
 /*正在加载状态*/
-.loadinger { width: 100%; height: 100%; position: fixed; left: 0px; top: 0px; z-index: 99; background: #fff; }
+#loadinger { width: 100%; height: 100%; position: fixed; left: 0px; top: 0px; z-index: 99; background:transparent;display: none }
 .loadingbox { width: 80px; height: 85px; background: rgba(0, 0, 0, 0.6); position: fixed; left: 50%; margin-left: -40px; top: 50%; margin-top: -40px; z-index: 9; border-radius: 5px; }
 .loading_icon { width: 40px; height: 40px; margin-top: 12px; margin-left: 20px; background-image: url(img/loading.png); -webkit-animation: rotate 1s linear infinite; animation: rotate 1s linear infinite; }
 .loadingbox p { color: #fff; line-height: 20px; font-size: 12px;text-align: center; margin-top: 8px}
@@ -285,7 +285,7 @@ input.init[type=radio]:checked::after { content: url(img/checked.png); display: 
 .iconwh6{width: 40px!important; height: 40px!important;}
 .tit_tag{background-color: #00aeff;width: 4px; height: 16px;border-radius: 2px; margin-right: 5px}
 .userImg{background-image: url(img/1.png);}
-.meterImg{background-image: url(img/);}
 .wh100{width: 100%; height: 100%}
 .tl0{left: 0;top: 0}
 .mat{margin: 0 auto;}
+.horScroll{overflow-x:scroll; overflow-y:hidden;}

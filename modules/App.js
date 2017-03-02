@@ -1,15 +1,13 @@
 import React from 'react'
-import { Router, Route, browserHistory, IndexRoute } from 'react-router'
-
-import NavLink from './NavLink'
-import About from './About'
-import Repos from './Repos'
-
-
 import MeterList from './Home/MeterList'
 import Grid from './Home/Grid'
 import Anno from './Home/Anno'
 import WaterFinance from './Home/WaterFinance'
+import MyCenter from './Home/MyCenter'
+import Drinking from './Home/Drinking'
+import ShopCity from './Home/ShopCity'
+import Sociality from './Home/Sociality'
+import Friend from './Home/Friend'
 
 export default React.createClass({
   render() {
@@ -19,16 +17,12 @@ export default React.createClass({
               <Grid />
               <Anno />
               <WaterFinance />
+              <MyCenter />
+              <Drinking />
+              <ShopCity />
+              <Sociality />
+              <Friend />
             </div>      
-      // <div>
-      //   <h1>React Router Tutorial</h1>
-      //   <ul role="nav">
-      //     <li><NavLink to="/" onlyActiveOnIndex>Home</NavLink></li>
-      //     <li><NavLink to="/About">About</NavLink></li>
-      //     <li><NavLink to="/Repos">Repos</NavLink></li>
-      //   </ul>
-      //   {this.props.children}
-      // </div>
     )
   }
 })

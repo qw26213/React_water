@@ -3,50 +3,35 @@ import { render } from 'react-dom'
 import { Router, Route, browserHistory, IndexRoute,hashHistory } from 'react-router'
 import App from './modules/App'
 import Myapp from './modules/Myapp'
-import Anno from './modules/Home/Anno'
-import Grid from './modules/Home/Grid'
-import Laws from './modules/Home/Laws'
-import Feedback from './modules/Home/Feedback'
-import QuickPay from './modules/Home/QuickPay'
-import pauseReport from './modules/Home/pauseReport'
-import Mount from './modules/Home/Mount'
-import Mend from './modules/Home/Mend'
-import MapSite from './modules/Home/MapSite'
-import Contactus from './modules/Home/Contactus'
-import WaterPrice from './modules/Home/WaterPrice'
-import WaterQuality from './modules/Home/WaterQuality'
-import LawContent from './modules/Home/LawContent'
-import MeterInfo from './modules/Home/MeterInfo'
-import MeterDetail from './modules/Home/MeterDetail'
-import AddMeter from './modules/Home/AddMeter'
-import CompileMeter from './modules/Home/CompileMeter'
-import PayInfo from './modules/Home/PayInfo'
+import Laws from './modules/Laws'
+import Feedback from './modules/Feedback'
+import QuickPay from './modules/QuickPay'
+import pauseReport from './modules/pauseReport'
+import Mount from './modules/Mount'
+import Mend from './modules/Mend'
+import MapSite from './modules/MapSite'
+import Contactus from './modules/Contactus'
+import WaterPrice from './modules/WaterPrice'
+import WaterQuality from './modules/WaterQuality'
+import LawContent from './modules/LawContent'
+import MeterInfo from './modules/MeterInfo'
+import MeterDetail from './modules/MeterDetail'
+import AddMeter from './modules/AddMeter'
+import CompileMeter from './modules/CompileMeter'
+import PayInfo from './modules/PayInfo'
 import AllFunction from './modules/Home/AllFunction'
-import PayWays from './modules/Home/PayWays'
-import Coupon from './modules/Home/Coupon'
-import PayFee from './modules/Home/PayFee'
-import Chart from './modules/Home/Chart'
-import Select from './modules/Home/Select'
+import PayWays from './modules/PayWays'
+import Coupon from './modules/Coupon'
+import PayFee from './modules/PayFee'
+import Chart from './modules/Chart'
+import Select from './modules/Select'
+import CityPicker from './modules/pages/picker/index'
 
-import About from './modules/About'
-import Repos from './modules/Repos'
-import PtrDemo from './modules/PtrDemo'
-
-var orignalSetItem = localStorage.setItem;
-localStorage.setItem = function(action,params){
-  var setItemEvent = new Event(action);
-  setItemEvent.params = params;
-  window.dispatchEvent(setItemEvent);
-  orignalSetItem.apply(this,arguments);
-}
-
-
+import PullToRefresh from './modules/pages/pullToRefresh/index'
 render((
       <Router history={hashHistory}>
         <Route path="/" component={App}/>
         <Route path="/Myapp" component={Myapp}/>
-        <Route path="/Anno" component={Anno}/>
-        <Route path="/Grid" component={Grid}/>
         <Route path="/Laws" component={Laws}/>
         <Route path="/Feedback" component={Feedback}/>
         <Route path="/QuickPay" component={QuickPay}/>
@@ -69,10 +54,9 @@ render((
         <Route path="/PayFee" component={PayFee}/>
         <Route path="/Chart" component={Chart}/>
         <Route path="/Select" component={Select}/>
+        <Route path="/CityPicker" component={CityPicker}/>
 
-        <Route path="/About" component={About}/>
-        <Route path="/Repos" component={Repos}/>
-        <Route path="/PtrDemo" component={PtrDemo}/>
+        <Route path="/PullToRefresh" component={PullToRefresh}/>
       </Router>
 ), document.getElementById('app'))
 
