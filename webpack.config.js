@@ -1,5 +1,4 @@
 var webpack = require('webpack')
-
 module.exports = {
   entry: './index.js',
 
@@ -24,7 +23,7 @@ module.exports = {
     loaders: [
       { test: /\.js$/, exclude: /node_modules/, loader: 'babel-loader?presets[]=es2015&presets[]=react' },
       { test: /\.(png|jpg)$/, loader: 'url-loader?limit=81920' },
-      { test: /\.css$/, loader: 'css'}
+      { test: /\.css$/,loaders:['style','css']},
     ]
   }
 }

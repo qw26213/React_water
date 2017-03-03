@@ -171,7 +171,7 @@
  }
 
 /*更改水表部分*/
-.water_meter_box{background: url(img/bg@2x.png) no-repeat;background-size: 100% 100%;overflow: hidden;}
+.meter_box{overflow: hidden;}
 .swiper-container2{margin: 0 auto;position: relative;overflow: hidden;z-index: 1;width: 100%;}
 .meterImg2{background-image: url(img/dizhi@2x.png);}
 .more{background-image: url(img/gengduo@2x.png);margin-left: 5px;}
@@ -223,3 +223,5 @@ input[type="file"]{position:absolute; width: 100%; height: 100%; display: block;
 .ulev36{font-size: 36px}
 .h25{height: 25px}
 .bottom0{bottom: 0!important}
+
+.add_water{background-image: url(img/add_water.png); width: 50px; height: 50px;}

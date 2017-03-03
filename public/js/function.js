@@ -237,7 +237,7 @@ function RndNum(MaxNum, MinNum) {
 
 // 开启loading页
 function Loading(){
-    var loadingHtml = '<div class="loadingbox"><div class="loading_icon ub-img7"></div><p>加载中...</p></div>';
+    var loadingHtml = '<div class="loadingbox"><div class="loading_icon"></div><p>加载中...</p></div>';
     $$('loadinger').style.display = "block";
     $$('loadinger').innerHTML = loadingHtml;
 }

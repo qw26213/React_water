@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="maximum-scale=1,initial-scale=1.0, user-scalable=no, width=device-width">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="x5-orientation" content="portrait">
+    <title>快捷缴费</title>
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/index.css">
+    <script src="js/jquery.min.js"></script>
+    <script src="js/common.js"></script>
+</head>
+<body>
+<div class="header urel">
+	<div class="headL uabs" onclick="back()"><span class="icon_back ub-img"></span></div>
+	<div class="tx-c w100 pageTit">快捷缴费</div>
+</div>
+<div class="plr15 bgb btbc mt10">
+	<div class="h45 bbc ub-ac" onclick="showSelect(1)">
+		<div class="w60">水&nbsp;&nbsp;司</div><div class="h30 ulev0 ub-f1 lh30 ml10" id="waterCor">请选择水司</div><div class="arrow-right ub-img1"></div>
+	</div>
+	<!-- <div class="h45 ub-ac bbc">
+		<div class="w60">用户名</div><input type="text" id="username" placeholder="请输入用户名" class="h30 ulev0 ub-f1 ml10" />
+	</div> -->
+	<div class="h45 ub-ac">
+		<div class="w60">水表号</div><input type="text" id="meternumber" placeholder="请输入水表号" class="h30 ulev0 ub-f1 ml10" />
+	</div>
+</div>
+<div class="nextFoot tx-c plr15">
+    <div class="w100 h40" onclick="nextPage()" id="feeStatus">下一步</div>
+</div>
+<div class="selectbox uhide"></div>
+<div class="textTips uhide"><span></span></div>
+</body>
+</html>
+<script>
+ function nextPage(){
+   var waterName = $('#waterCor').html().trim();
+   var meternumber = $('#meternumber').val().trim();
+    if(waterName==""||meternumber==""){
+ 	textTip('水司名或水表名不能为空！')
+    }else if(meternumber==""){
+ 	textTip('水表号不能为空！')
+    }else{
+	   Loading();
+	   var paraArray = {
+	        waterCorpId: localStorage.waterCorpId,//水司id
+	        token: localStorage.token,//用户标识
+	        userID: meternumber
+	    }
+	    $.ajax({
+	        url:ip_url+'/memeterinfo/queryMeter.json',
+	        type:'POST',
+	        data:{"requestPara":JSON.stringify(paraArray)},
+	        dataType:"json",
+	        success:function(data){
+	            closeLoading();
+	            if(data.status==0){
+		       if(data.data[0].arrearage==0){
+			$('#feeStatus').html('暂未欠费，点击刷新！');
+		       }else{
+	                        localStorage.meterNum = data.data[0].userID//水表号
+	                        openHref('payinfo.html');
+	                  }
+	            }else{
+		 	textTip(data.message)
+	            }
+	        },
+	        error: function(err){
+	            closeLoading();
+	            textTip('网络太不给力！')
+	        }
+	    })
+	 }
+ }
+</script>

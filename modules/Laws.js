@@ -10,7 +10,7 @@ export default React.createClass({
   componentDidMount() {
     document.title = "政策法规";$$('pageTit').innerText = "政策法规";
         if(sessionStorage.LawInfo){
-            this.setState({loading: false, data: JSON.parse(sessionStorage.LawInfo)});
+            this.setState({data: JSON.parse(sessionStorage.LawInfo)});
             return;
         }
         this.getLawList();

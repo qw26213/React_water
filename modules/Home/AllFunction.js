@@ -1,12 +1,14 @@
 import React from 'react'
 import { Link } from 'react-router' 
+import Grid from './Grid'
 export default React.createClass({
    componentDidMount() {
-      document.title = "全部应用";document.getElementById('pageTit').innerText = "全部应用";
+      document.title = "全部应用";$$('pageTit').innerText = "全部应用";
   },
   render() {
     return (
     <div>
+        <Grid />
         <div className="bgb btbc mt10 bgb ptb10">
             <div className="plr15 bc ulev1 h30 ub-ac bbc">我的应用</div>
             <div className="clearfix w100">

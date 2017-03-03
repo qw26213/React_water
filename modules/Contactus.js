@@ -11,12 +11,12 @@ export default React.createClass({
                     <div className="h40 ub-ac bbc">
                         <span className="rewh re01 ub-img7 mr10"></span>
                         <div className="ub-f1 bc ulev0">24小时热线电话</div>
-                        <div className=" sc1 ulev0">0701-6221221</div><span className="arrow-right ub-img7 ml10"></span>
+                        <div className=" sc1 ulev0">0701-6221211</div><span className="arrow-right ub-img7 ml10"></span>
                     </div>
                     <div className="h40 ub-ac bbc">
                         <span className="rewh re02 ub-img7 mr10"></span>
                         <div className="ub-f1 bc ulev0">举报电话</div>
-                        <div className=" sc1 ulev0">0701-6216296</div><span className="arrow-right ub-img7 ml10"></span>
+                        <div className=" sc1 ulev0">0701-6216696</div><span className="arrow-right ub-img7 ml10"></span>
                     </div>
                     <div className="h40 ub-ac bbc">
                         <span className="rewh re03 ub-img7 mr10"></span>

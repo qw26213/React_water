@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="maximum-scale=1,initial-scale=1.0, user-scalable=no, width=device-width">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="x5-orientation" content="portrait">
+    <title>政策法规详情</title>
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/index.css">
+    <script src="js/jquery.min.js"></script>
+    <script src="js/common.js"></script>
+</head>
+<style>
+    .content p{line-height: 30px; font-size: 14px}
+</style>
+<body>
+<div class="header urel">
+    <div class="headL uabs" onclick="back()"><span class="icon_back ub-img"></span></div>
+    <div class="tx-c w100 pageTit"></div>
+</div>
+<div class="lawcontent p15">
+    <h2 class="tx-c ulev2"></h2>
+    <p class="tx-c bc time ulev-1 lh36"></p>
+    <div class="content"></div>
+</div>
+</body>
+</html>
+<script>
+getLawsContent();
+function getLawsContent(){
+    $('h2').html(localStorage.title);
+    $('.time').html(localStorage.time);
+    $('.content').html(localStorage.content);
+}
+</script>

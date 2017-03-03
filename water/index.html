@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="maximum-scale=1,initial-scale=1.0, user-scalable=no, width=device-width">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="x5-orientation" content="portrait">
+    <title>首 页</title>
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/swiper.min.css">
+    <script src="js/jquery.min.js"></script>
+    <script src="js/common.js"></script>
+    <script src="js/swiper.min.js"></script>
+</head>
+<body>
+<style>.swiper-slide {box-sizing: border-box;} .h140{height: 140px;} .h130{height: 130px;}.arrow-down{width: 16px;height: 16px}
+.regetbtn{width: 200px; height: 36px; line-height: 36px; text-align: center; background-color: #ff9000; color: #fff; border-radius: 18px;}
+</style>
+<div class="header urel">
+	<!-- <div class="headL uabs" onclick="showSelect(0)" style="width:100px">
+		<div style="color:#fff;" class="ulev0 h45 w80 ub-apc">
+			<div id="waterCor">选择水司</div><div class="arrow-down ub-img7"></div>
+		</div>
+	</div> -->
+	<div class="tx-c w100 pageTit">首 页</div>
+	<div class="headR uabs" onclick="enterMyclock()"><span class="icon_clock ub-img"></span></div>
+</div>
+<div class="swiper-container">
+        <div class="swiper-wrapper" id="meterInfo">
+	       <div class="p15 index_m1 swiper-slide">
+		 <div class="h140 bac ub ub-ac ub-pc bc ulev1">获取数据中<dot>...</dot></div>
+	        </div>
+        </div>
+</div>
+<div class="fuwu bgwhite">
+	<div class="ub btc">
+		<div class="ub-f1 ub ub-ac ub-pc h95 ub-ver" onclick="openHref('quickPay.html')">
+			<div class="icon_01 iconwh ub-img7"></div><h3 class="mt05">快捷缴费</h3>
+		</div>
+		<div class="ub-f1 ub ub-ac ub-pc h95 ub-ver" onclick="openHref('record.html')">
+			<div class="icon_02 iconwh ub-img7"></div><h3 class="mt05">缴费记录</h3>
+		</div>
+		<div class="ub-f1 ub ub-ac ub-pc h95 ub-ver" onclick="openHref('quality.html')">
+			<div class="icon_03 iconwh ub-img7"></div><h3 class="mt05">水质详情</h3>
+		</div>
+		<div class="ub-f1 ub ub-ac ub-pc h95 ub-ver" onclick="openHref('pauseReport.html')">
+			<div class="icon_04 iconwh ub-img7"></div><h3 class="mt05">停水报告</h3>
+		</div>
+	</div>
+	<div class="ub">
+		<div class="ub-f1 ub ub-ac ub-pc h95 ub-ver" onclick="openHref('mend.html')">
+			<div class="icon_05 iconwh ub-img7"></div><h3 class="mt05">在线报修</h3>
+		</div>
+		<div class="ub-f1 ub ub-ac ub-pc h95 ub-ver" onclick="openHref('mount.html')">
+			<div class="icon_06 iconwh ub-img7"></div><h3 class="mt05">在线报装</h3>
+		</div>
+		<div class="ub-f1 ub ub-ac ub-pc h95 ub-ver" onclick="openHref('law.html')">
+			<div class="icon_07 iconwh ub-img7"></div><h3 class="mt05">政策法规</h3>
+		</div>
+		<div class="ub-f1 ub ub-ac ub-pc h95 ub-ver" onclick="openHref('feedback.html')">
+			<div class="icon_08 iconwh ub-img7"></div><h3 class="mt05">意见反馈</h3>
+		</div>
+	</div>
+	<div class="ub">
+		<div class="ub-f1 ub ub-ac ub-pc h95 ub-ver" onclick="openHref('../dist/index.html')">
+			<div class="icon_05 iconwh ub-img7"></div><h3 class="mt05">跳react</h3>
+		</div>
+		<div class="ub-f1 ub ub-ac ub-pc h95 ub-ver" onclick="openHref('../dist/index.html#/AddMeter?_k=23uo23')">
+			<div class="icon_06 iconwh ub-img7"></div><h3 class="mt05">react添加</h3>
+		</div>
+		<div class="ub-f1 ub ub-ac ub-pc h95 ub-ver" onclick="openHref('../dist/index.html#/Laws?_k=6rd7u6')">
+			<div class="icon_07 iconwh ub-img7"></div><h3 class="mt05">react法律</h3>
+		</div>
+		<div class="ub-f1 ub ub-ac ub-pc h95 ub-ver" onclick="openHref('../dist/index.html#/MeterInfo?_k=6rd7u6')">
+			<div class="icon_08 iconwh ub-img7"></div><h3 class="mt05">意见反馈</h3>
+		</div>
+	</div>
+</div>
+<div class="tx-l matterDir">办事指南</div>
+<div class="ub w100 matterDircon btc bgwhite">
+	<div class="ub-f1 ub ub-ac ub-pc h95 ub-ver" onclick="openHref('dir1.html')">
+		<div class="icon_09 iconwh ub-img7"></div><h3 class="mt05">水价信息</h3>
+	</div>
+	<div class="ub-f1 ub ub-ac ub-pc h95 ub-ver" onclick="openHref('dir2.html')">
+		<div class="icon_10 iconwh ub-img7"></div><h3 class="mt05">网点导航</h3>
+	</div>
+	<div class="ub-f1 ub ub-ac ub-pc h95 ub-ver" onclick="openHref('dir3.html')">
+		<div class="icon_11 iconwh ub-img7"></div><h3 class="mt05">行业热线</h3>
+	</div>
+</div>
+<div class="w100 bannar" onclick="openHref('quickPay.html')">
+	<img src="images/banner.png" class="w100">
+</div>
+<div class="selectbox uhide"></div>
+<div class="textTips uhide"><span></span></div>
+</body>
+</html>
+<script>
+// placeInit();
+var meterCount = 0;//水表数
+getmemeterinfo();
+var meterData;
+function getmemeterinfo(){
+   var paraArray = {
+        waterCorpId: localStorage.waterCorpId,//水司id
+        token: localStorage.token//水司id
+    }
+    var meterHtml = "";
+    Loading();
+    $.ajax({
+        url:ip_url+'/memeterinfo/getMeterlist.json',
+        type:'POST',
+        data:{"requestPara":JSON.stringify(paraArray)},
+        dataType:"json",
+        timeout:10000,
+        success:function(data){
+    	closeLoading();
+            if(data.status==0){
+            	  if(data.data!=""){
+            	  	meterCount = data.data.length;
+                   for(var i = 0;i<meterCount;i++){
+                   	if(data.data[i].arrearage==0)
+                    meterHtml +='<div class="p15 index_m1  swiper-slide">\
+		 <div class="h130 bac ub ub-ver plr10">\
+			<div class="ub-apc w100 bbc h80">\
+				<span  class="icon_clock ub-img wh60"></span>\
+				<div class="ub-f1 ub-pc ub-ver"><h3 class=:"uelv1">'+data.data[i].meterName+'</h3><p class="mt05 ulev0">('+data.data[i].meterNumber+')</p></div>\
+			</div>\
+			<div class="ub-ac w100 h50">\
+				<div class="ub-f1 ub-ac sc1">\
+					<div class="w60 tx-c bc1">'+data.data[i].arrearage+'<i class="ulev-1">元</i><br/><i class="ulev-1">应付金额</i></div>|\
+					<div class="w60 tx-c bc1">'+data.data[i].balance+'<i class="ulev-1">元</i><br/><i class="ulev-1">账单金额</i></div>|\
+					<div class="w60 tx-c ulev0 bc1">已缴清<br/><i class="ulev-1">本期账单</i></div>\
+				</div>\
+			</div>\
+			<div class="payed_icon wh80 ub-img7"></div>\
+		   </div>\
+	         </div>';
+	         else{
+                    meterHtml +='<div class="p15 index_m1  swiper-slide">\
+		 <div class="h130 bac ub ub-ver plr10">\
+			<div class="ub-apc w100 bbc h80">\
+				<span  class="icon_clock ub-img wh60"></span>\
+				<div class="ub-f1 ub-pc ub-ver"><h3 class=:"uelv1">'+data.data[i].meterName+'</h3><p class="mt05 ulev0">('+data.data[i].meterNumber+')</p></div>\
+				<div class="payBtn" onclick="payfee('+i+')">缴费</div>\
+			</div>\
+			<div class="ub-ac w100 h50">\
+				<div class="ub-f1 ub-ac sc1">\
+					<div class="w60 tx-c bc1">'+data.data[i].arrearage+'<i class="ulev-1">元</i><br/><i class="ulev-1">应付金额</i></div>|\
+					<div class="w60 tx-c bc1">'+data.data[i].balance+'<i class="ulev-1">元</i><br/><i class="ulev-1">账单金额</i></div>|\
+					<div class="w60 tx-c ulev0 bc1">'+(Number(data.data[i].arrearage)+Number(data.data[i].balance)).toFixed(2)+'<br/><i class="ulev-1">本期账单</i></div>\
+				</div>\
+				<div class="h40 lh40 bc">'+getCountDays()+'天后到期</div>\
+			</div>\
+		   </div>\
+	         </div>';
+	         }
+               }
+               meterData = data.data;
+               $('#meterInfo').html(meterHtml);
+               var swiper = new Swiper('.swiper-container');
+            	}else{
+		meterHtml +='<div class="p15 index_m1 w100" onclick="openHref(\'addclock.html\')">\
+					<div class="w100 ub-apc ub-ver h130">\
+						<div class="add_icon ub-img7 "></div>\
+						<div class="tx-c mt15">请绑定水表</div>\
+					</div>\
+				</div>';            		
+	            $('#meterInfo ').html(meterHtml);
+		}
+            }else{
+	meterHtml +='<div class="p15 index_m1 w100">\
+				<div class="w100 ub-apc ub-ver h130 ulev2">验证失败，请重新登录</div>\
+			</div>';            		
+            $('#meterInfo ').html(meterHtml);
+            }
+        },
+        error: function(err){
+    	closeLoading();
+	meterHtml +='<div class="p15 index_m1 w100">\
+				<div class="w100 ub-apc ub-ver h130">\
+					<div class="regetbtn" onclick="getmemeterinfo()">数据获取失败，请重试</div>\
+				</div>\
+			</div>';            		
+            $('#meterInfo ').html(meterHtml);
+        }
+    })
+}
+
+
+function enterMyclock(){
+	if(meterCount==0){
+		textTip('您还没绑定水表呢！')
+	}else{
+    	             openHref('myclock.html')
+	}
+}
+
+/*******返回月剩几天*********/
+function getCountDays() {
+        var curDate = new Date();
+        var curMonth = curDate.getMonth();
+        curDate.setMonth(curMonth + 1);
+        var curDay = curDate.getDate();
+        curDate.setDate(0);
+        return parseInt(curDate.getDate()) - parseInt(curDay);
+}
+
+function payfee(i){
+       localStorage.meterNum = meterData[i].meterNumber//水表号
+       openHref('payinfo.html');
+}
+
+
+</script>
